@@ -19,26 +19,22 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber valueOf(int value) {
-        if (isInvalidLottoNumberBound(value)) {
-            throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_BOUND_MESSAGE);
+        if (LOTTO_NUMBER_INSTANCE.containsKey(value)) {
+            return LOTTO_NUMBER_INSTANCE.get(value);
         }
-        return LOTTO_NUMBER_INSTANCE.get(value);
+        throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_BOUND_MESSAGE);
     }
 
     private LottoNumber(int value) {
         this.value = value;
     }
 
-    private static boolean isInvalidLottoNumberBound(int number) {
-        return number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoNumber lottoNumber = (LottoNumber) o;
-        return value == lottoNumber.value;
+        LottoNumber that = (LottoNumber) o;
+        return Objects.equals(value, that.value);
     }
 
     @Override
