@@ -20,7 +20,7 @@ class ShuffledNumberDrawerTest {
 
         assertThat(numbers).hasSize(size);
         assertThat(numbers).allMatch(
-                (number) -> number.compareTo(LottoNumber.valueOf(0)) > 0
-                        && number.compareTo(LottoNumber.valueOf(bound)) < 0);
+                (number) -> number.compareTo(LottoNumber.valueOf(1)) >= 0
+                        && number.compareTo(LottoNumber.valueOf(bound)) <= 0);
     }
 }
